@@ -15,12 +15,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Build, tag, and push image to DockerHub
+      - name: Build and Tag image 
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-          IMAGE_NAME: my-image
-        run: |
+          IMAGE_NAME: demo-image
+        run: 
           docker build -t $DOCKER_HUB_USERNAME/$IMAGE_NAME .
+      -name: Push image to DockerHub
+        run: |
+          docker login -u $DOCKER_HUB_USERNAME -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push $DOCKER_HUB_USERNAME/$IMAGE_NAME:latest
 
   test:
