@@ -16,7 +16,7 @@ jobs:
           IMAGE_NAME: demo-image
         run: 
           docker build -t $DOCKER_HUB_USERNAME/$IMAGE_NAME .
-      -name: Push image to DockerHub
+      - name: Push image to DockerHub
         run: |
           docker login -u $DOCKER_HUB_USERNAME -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push $DOCKER_HUB_USERNAME/$IMAGE_NAME:latest
